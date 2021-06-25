@@ -1,8 +1,23 @@
 const inquirer = require('inquirer');
-const { createConnection } = require('mysql');
+const mysql = require('mysql');
+const connection = mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password:'password',
+    database:'', //fill in port also
+}); 
+connection.connect((err) => {
+  if (err) throw err;
+  console.log(`connected as id ${connection.threadId}`);
+  connection.end();
+});
+
 // * Add departments, roles, employees
 // * View departments, roles, employees//
 // * Update employee roles
+
+
 const employeeOpt = () => {
     inquirer
     .prompt({
@@ -67,7 +82,7 @@ const addRole = () =>{
     ])
     .then((answer) => {
         connection.query(
-            'INSERT INTO department SET ?',//
+            'INSERT INTO department SET ?',
             {
             title: answer.item,
             salary: answer.item,
