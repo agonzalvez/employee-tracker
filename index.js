@@ -8,12 +8,6 @@ const connection = mysql.createConnection({
     database: 'employee_DB'
 });
 
-
-// * Add departments, roles, employees
-// * View departments, roles, employees//
-// * Update employee roles
-
-
 const employeeOpt = () => {
     inquirer
         .prompt({
@@ -30,18 +24,17 @@ const employeeOpt = () => {
                 case 'Add employee':
                     return addEmp();
                 case 'View Departments':
-                    return viewDep();
+                    return viewDepartment();
                 case 'View Roles':
                     return viewRoles();
                 case 'View Employees':
-                    return viewEmp();
+                    return viewEmployees();
                 case 'Update Employee Role':
                     return changeErole();
             }
         })
 };
 const addDept = () => {
-    // console.log('This function works!');
     inquirer
         .prompt({
             name: 'newDept',
@@ -138,34 +131,36 @@ const addEmp = () => {
             );
         });
 }
-viewDep = () => {
-    employeeOpt();
-};
-viewRoles = () => {
-    employeeOpt();
-};
-viewEmp = () => {
-    employeeOpt();
-};
-changeErole = () => {
-    employeeOpt();
-}
-// //const addEmployee
-// //inquirer prompt
-// //.then answer and connection query  
-// //insert into employee tablenode 
 
 const viewDepartment = () => {
     console.log('Pulling up department information...\n');
-    connection.query('SELECT * FROM department', (err, res) => {
+    connection.query('SELECT * FROM departments', (err, res) => {
       if (err) throw err;
       console.log(res);
     });
+    employeeOpt();
   };
 
+
+const viewRoles = () => {
+    console.log('Pulling up roles...\n');
+    connection.query('SELECT * FROM roles', (err, res) => {
+        if (err) throw err;
+        console.log(res);
+    })
+    employeeOpt();
+}
+const viewEmployees = () => {
+    console.log('Pulling up employees...\n');
+    connection.query('SELECT * FROM employees', (err, res) => {
+        if (err) throw err;
+        console.log(res);
+    }) 
+    employeeOpt();
+}
+
   employeeOpt();
-  
+
 connection.connect((err) => {
     if (err) throw err;
-    console.log(`Now listening on PORT ${connection.port}`);
 });
