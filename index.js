@@ -127,12 +127,12 @@ const addEmp = () => {
         ])
         .then((answer) => {
             connection.query(
-                'INSERT INTO SET ?', //
+                'INSERT INTO employees SET ?', //
                 {
-                    first_name: answer.item,
-                    last_name: answer.item,
-                    role_id: answer.item,
-                    manager_id: answer.item
+                    first_name: answer.firstname,
+                    last_name: answer.lastname,
+                    role_id: answer.role,
+                    manager_id: answer.manid,
                 },
                 (err) => {
                     if (err) throw err;
