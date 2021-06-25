@@ -5,13 +5,9 @@ const connection = mysql.createConnection({
     port: 3306,
     user: 'root',
     password: 'password',
-    database: '', //fill in port also
+    database: 'employee_DB'
 });
-connection.connect((err) => {
-    if (err) throw err;
-    console.log(`connected as id ${connection.threadId}`);
-    connection.end();
-});
+
 
 // * Add departments, roles, employees
 // * View departments, roles, employees//
@@ -159,3 +155,9 @@ changeErole = () => {
 // //.then answer and connection query  
 // //insert into employee table
 employeeOpt();
+
+connection.connect((err) => {
+    if (err) throw err;
+    console.log(`Now listening on PORT ${connection.port}`);
+    connection.end();
+});
