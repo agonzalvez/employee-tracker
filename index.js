@@ -153,11 +153,19 @@ changeErole = () => {
 // //const addEmployee
 // //inquirer prompt
 // //.then answer and connection query  
-// //insert into employee table
-employeeOpt();
+// //insert into employee tablenode 
 
+const viewDepartment = () => {
+    console.log('Pulling up department information...\n');
+    connection.query('SELECT * FROM department', (err, res) => {
+      if (err) throw err;
+      console.log(res);
+    });
+  };
+
+  employeeOpt();
+  
 connection.connect((err) => {
     if (err) throw err;
     console.log(`Now listening on PORT ${connection.port}`);
-    connection.end();
 });
